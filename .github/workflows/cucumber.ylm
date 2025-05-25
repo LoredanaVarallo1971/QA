@@ -15,5 +15,10 @@ jobs:
           java-version: 17
 
       - name: Run Maven tests
+<<<<<<< HEAD
         working-directory: ./cucumber-java
 	run: mvn test
+=======
+        run: mvn test
+        working-directory: ./cucumber-java
+>>>>>>> fc9fcb21d79149b75897b06e856f77d32c98ae6a
