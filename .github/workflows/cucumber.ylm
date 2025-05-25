@@ -16,4 +16,4 @@ jobs:
 
       - name: Run Maven tests
         run: mvn test
-        working-directory: ./cucumber
+        working-directory: ./cucumber-java
