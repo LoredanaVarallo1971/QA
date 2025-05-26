@@ -5,6 +5,7 @@ on: [push, pull_request]
 jobs:
   test:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
 
@@ -20,9 +21,12 @@ jobs:
       - name: List files in root directory
         run: ls -la
 
+      - name: List files in QA directory
+        run: ls -la QA
+
       - name: List files in cucumber-java directory
-        run: ls -la cucumber-java
+        run: ls -la QA/cucumber-java
 
       - name: Run Maven tests
         run: mvn test
-        working-directory: ./cucumber-java
+        working-directory: ./QA/cucumber-java
