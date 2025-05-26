@@ -1,0 +1,21 @@
+name: CI - Run Tests in Docker
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test-cypress:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Build Docker image
+        run: docker build -t cypress-tests .
+
+      - name: Run Cypress tests inside Docker
+        run: docker run --name cypress-container cypress-tests
