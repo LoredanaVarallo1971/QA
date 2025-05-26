@@ -25,6 +25,7 @@ Example Feature and Step Definitions
 Located under:
 cucumber-java/src/test/java
 Run Cucumber Tests
+
 3.
 Cypress tests are defined under `QA/cypress/e2e/`, and automatically executed via GitHub Actions using this workflow:  
 [Run Cypress Tests](https://github.com/LoredanaVarallo1971/QA/actions)
