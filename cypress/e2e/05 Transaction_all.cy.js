@@ -1,50 +1,46 @@
-describe('template spec', () => {
-  it('passes', () => {
-    cy.visit('https://www.globalsqa.com/angularJs-protractor/BankingProject/#/login')
-    cy.url().should('include', '/BankingProject/#/login')
+describe('Transaction and balance test', () => {
+  it('executes deposits and verifies transactions', () => {
+    cy.visit('https://www.globalsqa.com/angularJs-protractor/BankingProject/#/login');
 
-    // Login
-    cy.contains('button', 'Customer Login').click()
-    cy.get('#userSelect').select('Harry Potter')
-    cy.get('button[type="submit"]').click()
-    cy.contains('Welcome Harry Potter').should('be.visible')
+    // Verifica URL corretto
+    cy.url().should('include', '/BankingProject/#/login');
 
-    // Deposit 100
-    cy.contains('button', 'Deposit').click()
-    cy.get('input[placeholder="amount"]').type('100')
-    cy.get('form button[type="submit"]').click()
-    cy.contains('Deposit Successful').should('be.visible')
+    // Login come Customer
+    cy.contains('Customer Login').click();
+    cy.get('#userSelect').select('Harry Potter');
+    cy.get('button[type="submit"]').click();
+    cy.contains('Welcome Harry Potter').should('be.visible');
 
-    // Deposit 10
-    cy.get('input[placeholder="amount"]').clear().type('10')
-    cy.get('form button[type="submit"]').click()
-    cy.contains('Deposit Successful').should('be.visible')
+    // Funzione di deposito parametrica
+    const deposit = (amount) => {
+      cy.contains('Deposit').click();
+      cy.get('input[placeholder="amount"]').clear().type(amount);
+      cy.get('form button[type="submit"]').click();
+      cy.contains('Deposit Successful').should('be.visible');
+    };
 
-    // Deposit 5
-    cy.get('input[placeholder="amount"]').clear().type('5')
-    cy.get('form button[type="submit"]').click()
-    cy.contains('Deposit Successful').should('be.visible')
+    // Esegui depositi
+    deposit(100);
+    deposit(10);
+    deposit(5);
 
-    // Verifica saldo
-    cy.get('strong.ng-binding').eq(1).should('have.text', '115')
+    // Verifica saldo aggiornato
+    cy.get('strong.ng-binding').eq(1).should('have.text', '115');
 
-    // Vai a Transactions
-    cy.contains('Transactions').click()
-    
-// Aspetta che l'URL contenga /listTx
-cy.url().should('include', '/listTx')
+    // Vai alla pagina delle transazioni
+    cy.contains('Transactions').click();
 
-// Aspetta che la tabella appaia
-cy.get('table tbody tr', { timeout: 10000 }).should('exist')
+    // Attendi URL corretto e presenza della tabella
+    cy.url().should('include', '/listTx');
+    cy.get('table tbody tr', { timeout: 15000 }).should('have.length.at.least', 3);
 
-    cy.get('.ng-binding', { timeout: 10000 }).should('exist')
-    
+    // Calcola e verifica il totale
     cy.get('table tbody tr').then($rows => {
       const total = Array.from($rows).reduce((sum, row) => {
-        const amount = parseFloat(row.cells[1].innerText)
-        return sum + (isNaN(amount) ? 0 : amount)
-      }, 0)
-      expect(total).to.equal(115)
-    })
-  })
-})
+        const amount = parseFloat(row.cells[1].innerText);
+        return sum + (isNaN(amount) ? 0 : amount);
+      }, 0);
+      expect(total).to.equal(115);
+    });
+  });
+});
