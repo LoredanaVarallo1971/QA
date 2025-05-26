@@ -14,4 +14,4 @@ module.exports = defineConfig({
     video: true,                      // record a video (utile in CI)
     screenshotOnRunFailure: true      // screenshot if fails
   }
-})
+});
