@@ -1,35 +1,29 @@
-# QA
-1. Multiple-choice test results are in Cucumber and Cypress Tasks.md
-2. In QA repository there is the cucumber project with JUnit and Maven, fully integrated with GitHub Actions.
+QA test
+1. Multiple-choice test results are available in Cucumber and Cypress Tasks.md.
 
-Project Structure
-Source folder: cucumber-java/src/test/java
+2.The Cucumber project (Java, JUnit, Maven) is located in the QA repository and fully integrated with GitHub Actions.
+
+Project structure:
+Source: cucumber-java/src/test/java
 Maven POM: cucumber-java/pom.xml
-Workflow file: .github/workflows/cucumber.yml
+Workflow: .github/workflows/cucumber.yml
 
-How to Run Tests
-The tests are automatically triggered:
+Test execution:
+Automatically triggered on push to main or when opening a pull request targeting main.
+Results available in the Actions tab on GitHub.
 
-when you push to the main branch
-or create a pull request targeting main
-You can view the latest test results in the Actions tab.
-
-Technologies Used
+Technologies:
 Java 17
 JUnit
 Cucumber
 Maven
 GitHub Actions
 
-Example Feature and Step Definitions
-Located under:
-cucumber-java/src/test/java
-Run Cucumber Tests
+3. The Cypress tests are located under QA/cypress/e2e/.
 
-3.
-Cypress tests are defined under `QA/cypress/e2e/`, and automatically executed via GitHub Actions using this workflow:  
-[Run Cypress Tests](https://github.com/LoredanaVarallo1971/QA/actions)
-
+They are executed automatically via GitHub Actions.
+The Cypress suite is run inside a Docker container, demonstrating CI/CD integration in an isolated test environment.
 
 
 Thank you for reviewing my work!
+Loredana Varallo
