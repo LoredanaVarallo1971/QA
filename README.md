@@ -25,5 +25,5 @@ They are executed automatically via GitHub Actions.
 The Cypress suite is run inside a Docker container, demonstrating CI/CD integration in an isolated test environment.
 
 
-Thank you for reviewing my work!
+Thank you!
 Loredana Varallo
